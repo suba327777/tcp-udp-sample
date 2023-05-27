@@ -1,5 +1,6 @@
 use log::*;
 use std::env;
+mod tcp_client;
 mod tcp_server;
 fn main() {
     env::set_var("RUST_LOG", "debug");
@@ -23,6 +24,7 @@ fn main() {
             }
             "client" => {
                 //TCPクライアンド呼び出し
+                tcp_client::connnect(address).unwrap_or_else(|e| error!("{}", e));
             }
             _ => {
                 missing_role();
