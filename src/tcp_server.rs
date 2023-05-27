@@ -9,10 +9,13 @@ pub fn serve(address: &str) -> Result<(), failure::Error> {
     loop {
         let (stream, _) = listener.accept()?;
 
-        //スレッドを立ち上げて接続に対処する
+        //スレッドを立ち上げて接続に対処する-> 複数のクライアントからのコネクションを同時に処理
         thread::spawn(move || {
             handler(stream).unwrap_or_else(|error| error!("{:?}", error));
         });
+
+        //1対1通信
+        // handler(stream).unwrap_or_else(|error| error!("{:?}", error));
     }
 }
 
