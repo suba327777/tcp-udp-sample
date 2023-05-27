@@ -2,6 +2,7 @@ use log::*;
 use std::env;
 mod tcp_client;
 mod tcp_server;
+mod udp_client;
 mod udp_server;
 fn main() {
     env::set_var("RUST_LOG", "debug");
@@ -38,6 +39,7 @@ fn main() {
             }
             "client" => {
                 //UDPクライアント呼び出し
+                udp_client::communicate(address).unwrap_or_else(|e| error!("{}", e));
             }
             _ => {
                 missing_role();
