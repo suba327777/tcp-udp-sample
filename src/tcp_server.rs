@@ -36,4 +36,3 @@ fn handler(mut stream: TcpStream) -> Result<(), failure::Error> {
         stream.write_all(&buffer[..nbytes])?;
     }
 }
-
